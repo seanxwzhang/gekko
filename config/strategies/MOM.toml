@@ -1,0 +1,7 @@
+short = 1
+long = 12
+up_confirmation_count = 2
+down_confirmation_count = 0
+requiredHistory = 12
+smoothness = 2
+candle_size = 30
