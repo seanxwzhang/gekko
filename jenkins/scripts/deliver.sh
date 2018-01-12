@@ -6,4 +6,4 @@ cd $SCRIPTPATH/../..
 echo $(pwd)
 echo $(ls)
 pm2 stop gekko
-pm2 start gekko -- -ui
+pm2 start gekko.js -- -ui
