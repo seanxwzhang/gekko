@@ -19,8 +19,7 @@ npm install -g pm2'''
         sh '''pwd
 ls jenkins
 pm2 kill
-pm2 start gekko.js -- -ui
-pm2 monitor'''
+pm2 start gekko.js -- -ui'''
       }
     }
   }
