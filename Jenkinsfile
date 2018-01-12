@@ -17,7 +17,7 @@ npm install'''
       steps {
         sh '''pwd
 ls jenkins
-./jenkins/scripts/deliver.sh'''
+sh ./jenkins/scripts/deliver.sh'''
       }
     }
   }
