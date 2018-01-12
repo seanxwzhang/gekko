@@ -16,7 +16,8 @@ npm install'''
     stage('Deliver') {
       steps {
         sh '''pwd
-ls'''
+ls jenkins
+./jenkins/scripts/deliver.sh'''
       }
     }
   }
