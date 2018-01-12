@@ -10,7 +10,8 @@ pipeline {
     stage('Build') {
       steps {
         sh '''echo $(pwd)
-npm install'''
+npm install
+npm install -g pm2'''
       }
     }
     stage('Deliver') {
