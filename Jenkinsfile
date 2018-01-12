@@ -13,5 +13,11 @@ pipeline {
 npm install'''
       }
     }
+    stage('Deliver') {
+      steps {
+        sh '''pwd
+ls'''
+      }
+    }
   }
 }
