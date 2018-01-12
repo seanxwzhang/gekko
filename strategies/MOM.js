@@ -30,7 +30,7 @@ method.init = function() {
 
   // define the indicators we need
   this.addIndicator('mom', 'MOM', this.settings);
-}
+};
 
 // what happens on every new candle?
 method.update = function(candle) {
@@ -38,7 +38,7 @@ method.update = function(candle) {
   if (this.memory.length > Math.max(this.settings.up_confirmation_count, this.settings.down_confirmation_count) + 1) {
     this.memory.shift();
   }
-}
+};
 
 // for debugging purposes: log the last calculated
 // EMAs and diff.
@@ -47,7 +47,7 @@ method.log = function() {
   var mom1 = this.indicators.mom.result.mom1;
   var smom = this.indicators.mom.result.smoothed_mom;
 
-  log.debug('calculated MOM properties for candle:')
+  log.debug('calculated MOM properties for candle:');
   log.debug('\t', 'long mom:', mom1.toFixed(8));
   log.debug('\t', 'short mom:', mom0.toFixed(8));
   log.debug('\t', 'smoothed_mom', smom.toFixed(8));
@@ -55,14 +55,14 @@ method.log = function() {
   var smoms = this.memory.map((x) => {return x.smoothed_mom;});
   log.debug('\t', 'smoms', smoms);
   log.debug('\t', 'all_satisfy(0, smoms, greater): ', all_satisfy(0, smoms, greater));
-}
+};
 
 method.check = function(candle) {
   var mom0 = this.indicators.mom.result.mom0;
   var mom1 = this.indicators.mom.result.mom1;
   var smom = this.indicators.mom.result.smoothed_mom;
   var smoms = this.memory.map((x) => {return x.smoothed_mom;});
-  
+
   var price = candle.close;
 
   var message = '@ ' + price.toFixed(8);
@@ -75,7 +75,7 @@ method.check = function(candle) {
     this.advice('short');
     this.currentTrend = 'down';
   }
-}
+};
 
 module.exports = method;
 
