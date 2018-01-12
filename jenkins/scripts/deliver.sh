@@ -3,7 +3,7 @@
 
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 cd $SCRIPTPATH/../..
-pwd
-ls
+echo $(pwd)
+echo $(ls)
 pm2 stop gekko
 pm2 start gekko -- -ui
