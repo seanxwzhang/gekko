@@ -18,7 +18,7 @@ npm install -g pm2'''
       steps {
         sh '''pwd
 ls jenkins
-sh ./jenkins/scripts/deliver.sh'''
+pm2 start gekko.js -- -ui'''
       }
     }
   }
