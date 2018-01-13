@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         sh '''whoami
-source ~/.profile
+echo $0
 nvm use stable
 npm install
 npm install -g pm2'''
