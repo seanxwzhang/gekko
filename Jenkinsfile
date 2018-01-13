@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         sh '''export PATH=/root/.nvm/versions/node/v9.4.0/bin:$PATH
-npm install'''
+npm install --only=production'''
       }
     }
     stage('Deliver') {
@@ -12,7 +12,7 @@ npm install'''
         sh '''export PATH=/root/.nvm/versions/node/v9.4.0/bin:$PATH
 npm install -g pm2
 pm2 kill
-pm2 start gekko.js -- -ui'''
+pm2 start gekko.js -- --ui'''
       }
     }
   }
