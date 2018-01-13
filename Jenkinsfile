@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh '''npm install
+        sh '''whoami
+npm install
 npm install -g pm2'''
       }
     }
