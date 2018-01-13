@@ -33,6 +33,7 @@ method.init = function() {
   this.up_confirmation_count = this.settings.up_confirmation_count;
   this.down_confirmation_count = this.settings.down_confirmation_count;
   this.loss_limit = this.settings.loss_limit;
+  this.cur_loss = 0;
 
   // define the indicators we need
   this.addIndicator('mom', 'MOM', this.settings);
@@ -43,6 +44,11 @@ method.update = function(candle) {
   this.memory.push(this.indicators.mom.result);
   if (this.memory.length > Math.max(this.settings.up_confirmation_count, this.settings.down_confirmation_count) + 1) {
     this.memory.shift();
+  }
+  if (this.position != 0) {
+    this.cur_loss = (candle.close - this.position) / this.position;
+  } else {
+    this.cur_loss = 0;
   }
 };
 
@@ -58,9 +64,8 @@ method.log = function() {
   log.debug('\t', 'short mom:', mom0.toFixed(8));
   log.debug('\t', 'smoothed_mom', smom.toFixed(8));
   log.debug('\t', 'currentTrend', this.currentTrend);
-  var smoms = this.memory.map((x) => {return x.smoothed_mom;});
-  log.debug('\t', 'smoms', smoms);
-  log.debug('\t', 'all_satisfy(0, smoms, greater): ', all_satisfy(0, smoms, greater));
+  log.debug('\t', 'position', this.position);
+  log.debug('\t', 'cur_loss', this.cur_loss);
 };
 
 method.check = function(candle) {
