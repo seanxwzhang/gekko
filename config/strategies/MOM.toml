@@ -4,4 +4,5 @@ up_confirmation_count = 2
 down_confirmation_count = 0
 requiredHistory = 12
 smoothness = 2
-candle_size = 30
+candle_size = 90
+loss_limit = 0.1

@@ -13,6 +13,10 @@ var all_satisfy = function(benchmark, variables, fn) {
   }
   return true;
 };
+var stop_loss = function(price, position, loss_limit) {
+  var cur_loss = (price - position) / position;
+  return cur_loss < -loss_limit;
+};
 
 
 // let's create our own method
@@ -24,9 +28,11 @@ method.init = function() {
 
   this.currentTrend = 'no';
   this.memory = [];
+  this.position = 0;
   this.requiredHistory = this.settings.requiredHistory;
   this.up_confirmation_count = this.settings.up_confirmation_count;
   this.down_confirmation_count = this.settings.down_confirmation_count;
+  this.loss_limit = this.settings.loss_limit;
 
   // define the indicators we need
   this.addIndicator('mom', 'MOM', this.settings);
@@ -66,16 +72,21 @@ method.check = function(candle) {
   var price = candle.close;
 
   var message = '@ ' + price.toFixed(8);
-  if (this.currentTrend != 'up' && all_satisfy(0, smoms.slice(-this.up_confirmation_count), greater)) {
+  if (this.currentTrend != 'up' && all_satisfy(0, smoms.slice(-this.up_confirmation_count + 1), greater)) {
     log.debug('we are entering an uptrend', message);
     this.advice('long');
     this.currentTrend = 'up';
-  } else if (this.currentTrend != 'down' && all_satisfy(0, smoms.slice(-this.down_confirmation_count), smaller)) {
+    this.position = price;
+  } else if (this.currentTrend != 'down' && all_satisfy(0, smoms.slice(-this.down_confirmation_count + 1), smaller)) {
     log.debug('we are entering a downtrend', message);
     this.advice('short');
     this.currentTrend = 'down';
+    this.position = 0;
+  } else if (stop_loss(price, this.position, this.loss_limit)) {
+    log.debug('we are stopping loss with loss_limit: ', this.loss_limit, ' ', message);
+    this.advice('short');
+    this.position = 0;
   }
 };
 
 module.exports = method;
-
