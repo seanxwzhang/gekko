@@ -5,6 +5,7 @@ pipeline {
       steps {
         sh '''whoami
 echo $0
+cp $0 /tmp/test.sh
 echo $SHELL
 nvm use stable
 npm install
