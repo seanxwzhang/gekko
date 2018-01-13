@@ -1,5 +1,2 @@
 #!/bin/bash
-# This script bootstraps Gekko using pm2
-
-pm2 kill
-pm2 start gekko.js -- --ui
+HOST=trade.seanxiaowenzhang.com PORT=3000 docker-compose up -d
