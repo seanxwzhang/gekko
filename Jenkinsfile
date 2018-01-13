@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh '''npm install
+        sh '''export PATH=/root/.nvm/versions/node/v9.4.0/bin:$PATH
+npm install
 npm install -g pm2'''
       }
     }
