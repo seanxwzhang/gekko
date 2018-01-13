@@ -3,12 +3,12 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh '/bin/bash ./jenkins/scripts/build.sh'
+        sh 'docker-compose build'
       }
     }
     stage('Deliver') {
       steps {
-        sh '/bin/bash ./jenkins/scripts/deliver.sh'
+        sh 'HOST=trade.seanxiaowenzhang.com PORT=3000 docker-compose up -d'
       }
     }
   }
