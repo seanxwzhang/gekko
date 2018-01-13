@@ -87,7 +87,7 @@ method.check = function(candle) {
     this.advice('short');
     this.currentTrend = 'down';
     this.position = 0;
-  } else if (stop_loss(price, this.position, this.loss_limit)) {
+  } else if (this.cur_loss < this.loss_limit) {
     log.debug('we are stopping loss with loss_limit: ', this.loss_limit, ' ', message);
     this.advice('short');
     this.position = 0;
