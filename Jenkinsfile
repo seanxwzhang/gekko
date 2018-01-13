@@ -3,12 +3,12 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh './jenkins/scripts/build.sh'
+        sh '/bin/bash ./jenkins/scripts/build.sh'
       }
     }
     stage('Deliver') {
       steps {
-        sh './jenkins/scripts/deliver.sh'
+        sh '/bin/bash ./jenkins/scripts/deliver.sh'
       }
     }
   }
