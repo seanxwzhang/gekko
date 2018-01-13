@@ -3,11 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh '''whoami
-echo $0
-cp $0 /tmp/test.sh
-echo $SHELL
-nvm use stable
+        sh '''nvm use stable
 npm install
 npm install -g pm2'''
       }
