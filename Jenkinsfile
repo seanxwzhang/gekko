@@ -9,7 +9,8 @@ docker-compose build'''
     }
     stage('Deliver') {
       steps {
-        sh '''docker ps --format \'{{.Names}}\' | grep "gekko" | awk \'{print $1}\' | xargs -I {} docker stop {}
+        sh '''env
+docker ps --format \'{{.Names}}\' | grep "gekko" | awk \'{print $1}\' | xargs -I {} docker stop {}
 HOST=trade.seanxiaowenzhang.com PORT=3000 docker-compose up -d'''
       }
     }
