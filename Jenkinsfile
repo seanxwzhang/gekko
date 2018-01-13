@@ -3,8 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh '''nvm use stable
-npm install
+        sh '''npm install
 npm install -g pm2'''
       }
     }
