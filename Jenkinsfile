@@ -5,6 +5,7 @@ pipeline {
       steps {
         sh '''whoami
 echo $0
+echo $SHELL
 nvm use stable
 npm install
 npm install -g pm2'''
