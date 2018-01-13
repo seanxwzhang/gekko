@@ -1,24 +1,21 @@
 pipeline {
-  agent {
-    docker {
-      args '-p 3000:3000'
-      image 'node'
-    }
-    
-  }
+  agent any
   stages {
     stage('Build') {
       steps {
-        sh '''echo $(pwd)
-npm install
-npm install -g pm2'''
+        sh '''sudo su ubuntu
+. ~/.profile
+npm install --only=production'''
       }
     }
     stage('Deliver') {
       steps {
-        sh '''pwd
-ls jenkins
-sh ./jenkins/scripts/deliver.sh'''
+        sh '''sudo su ubuntu
+. ~/.profile
+npm install -g pm2
+pm2 kill
+pm2 start gekko.js -- --ui
+curl localhost:3000'''
       }
     }
   }
