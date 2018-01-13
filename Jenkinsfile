@@ -4,12 +4,14 @@ pipeline {
     stage('Build') {
       steps {
         sh '''sudo su ubuntu
+. ~/.profile
 npm install --only=production'''
       }
     }
     stage('Deliver') {
       steps {
         sh '''sudo su ubuntu
+. ~/.profile
 npm install -g pm2
 pm2 kill
 pm2 start gekko.js -- --ui
