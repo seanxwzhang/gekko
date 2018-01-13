@@ -9,7 +9,8 @@ docker-compose build'''
     }
     stage('Deliver') {
       steps {
-        sh 'HOST=trade.seanxiaowenzhang.com PORT=3000 docker-compose up -d'
+        sh '''docker-compose down
+HOST=trade.seanxiaowenzhang.com PORT=3000 docker-compose up -d'''
       }
     }
   }
