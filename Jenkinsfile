@@ -4,6 +4,10 @@ pipeline {
     stage('Build') {
       steps {
         sh '''echo $(pwd)
+echo $(whoami)
+echo $(ls)
+echo $(lsb_release -a)
+
 npm install
 npm install -g pm2'''
       }
